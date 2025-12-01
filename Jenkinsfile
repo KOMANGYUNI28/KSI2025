@@ -1,23 +1,21 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/komangyuni28/KSI2025.git'
-            }
+            steps { checkout scm }
         }
-
-        stage('Install PHPUnit') {
-            steps {
-                bat 'composer install'
-            }
+        stage('Run PHP') {
+            steps { powershell 'php index.php' }
         }
-
-        stage('Run Test') {
-            steps {
-                bat 'vendor\\bin\\phpunit tests'
-            }
+        stage('Install Dependencies') {
+            steps { powershell 'composer install' }
         }
+        stage('Unit Test') {
+            steps { powershell 'php vendor\\bin\\phpunit tests' }
+        }
+    }
+    post {
+        success { echo 'Pipeline sukses dijalankan!' }
+        failure { echo 'Pipeline gagal!' }
     }
 }
