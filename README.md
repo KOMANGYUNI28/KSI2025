@@ -9,3 +9,5 @@ project php sederhana untuk pengujian cd/ci menggunakan jenkins dan GitHub Webho
 
 ## Tujuan
 Menguji integrasi CI/CD secara otomatis setiap terjadi push ke repository.
+
+Test CI/CD Jenkins
